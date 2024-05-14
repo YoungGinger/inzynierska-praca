@@ -1,26 +1,21 @@
-from rest_framework.generics import GenericAPIView
-from api.seralizers import LoginSerializer
-from django.contrib.auth import get_user_model
-from rest_framework.response import Response
-from django.contrib.auth import login, authenticate
-from rest_framework import status
+from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
-
-User = get_user_model()
-
-from api.seralizers import LoginSerializer
-
-
-class LoginView(GenericAPIView):
-    queryset = User.objects.all()
-    serializer_class = LoginSerializer
-    http_method_names = ['post']
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = authenticate(username=serializer.validated_data['login'], password=serializer.validated_data['password'])
-        if not user:
-            return Response({'error': 'invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
-        login(request, user)
-        return Response(serializer.data)
+@csrf_exempt
+def login_view(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        username = data.get('username')
+        password = data.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return JsonResponse({"message": "Login successful"}, status=200)
+            else:
+                return JsonResponse({"error": "Account is inactive"}, status=403)
+        else:
+            return JsonResponse({"error": "Invalid credentials"}, status=401)
+    return JsonResponse({"error": "Method not allowed"}, status=405)
