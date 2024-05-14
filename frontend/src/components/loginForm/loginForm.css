@@ -14,7 +14,7 @@
   align-items: center;
   padding-left: 40px;
   padding-top: 40px;
-  order: 1; /* Ustawienie kolejności wyświetlania na 1, aby było nad formularzem */
+  order: 1;
 }
 
 .logo-img {
@@ -64,20 +64,18 @@ button:hover {
   background-color: #424344;
 }
 
-/* Media queries dla responsywności */
-
 @media screen and (max-width: 600px) {
   .login-container {
-    flex-direction: column; /* Ustawienie kierunku flex na kolumnę dla ekranów o szerokości mniejszej niż 600px */
+    flex-direction: column;
   }
 
   .img-container {
-    flex: none; /* Wyłączenie elastyczności, aby logo było na stałe obok formularza */
+    flex: none;
     padding: 0;
-    order: 2; /* Ustawienie kolejności wyświetlania na 2, aby było pod formularzem */
+    order: 2;
   }
 
   .form-content {
-    flex: none; /* Wyłączenie elastyczności dla formularza */
+    flex: none;
   }
 }

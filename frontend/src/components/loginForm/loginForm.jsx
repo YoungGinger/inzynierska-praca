@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "./loginForm.css";
 import logo from "../../img/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
@@ -17,7 +19,7 @@ const LoginForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://adres-twojego-backendu/login/", {
+      const response = await fetch("http://127.0.0.1:8000/api/login/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,9 +27,16 @@ const LoginForm = () => {
         body: JSON.stringify({ username, password }),
       });
       const data = await response.json();
-      console.log(data); // Możesz obsłużyć odpowiedź backendu tutaj, np. wyświetlić komunikat dla użytkownika
+      if (response.ok) {
+        console.log("login succesfuly:", data);
+        navigate("/Home");
+      } else {
+        console.error("Failed to login:", data);
+        setError("Nieprawidłowa nazwa użytkownika lub hasło");
+      }
     } catch (error) {
-      console.error("Błąd podczas wysyłania żądania logowania:", error);
+      console.error("Network error:", error);
+      setError("Błąd sieci. Spróbuj ponownie później");
     }
   };
 
@@ -38,6 +47,7 @@ const LoginForm = () => {
       </div>
       <div className="form-content">
         <h2>Zaloguj się</h2>
+        {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="username">Nazwa użytkownika:</label>
