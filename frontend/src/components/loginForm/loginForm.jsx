@@ -6,8 +6,9 @@ import { useNavigate } from "react-router-dom";
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
+
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
@@ -28,15 +29,32 @@ const LoginForm = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        console.log("login succesfuly:", data);
-        navigate("/Home");
+        console.log("Login successful:", data);
+
+        localStorage.setItem("token", data.token);
+
+        const user = data.user;
+        if (!user) {
+          throw new Error("Brak danych użytkownika w odpowiedzi.");
+        }
+        console.log("User role:", user);
+
+        if (user.is_player) {
+          navigate("/PlayerHome");
+        } else if (user.is_coach) {
+          navigate("/CoachHome");
+        } else if (user.is_president) {
+          navigate("/PresidentHome");
+        } else {
+          navigate("/home");
+        }
       } else {
+        setError("Failed to login. Please check your credentials.");
         console.error("Failed to login:", data);
-        setError("Nieprawidłowa nazwa użytkownika lub hasło");
       }
     } catch (error) {
+      setError("Network error. Please try again.");
       console.error("Network error:", error);
-      setError("Błąd sieci. Spróbuj ponownie później");
     }
   };
 
@@ -47,7 +65,7 @@ const LoginForm = () => {
       </div>
       <div className="form-content">
         <h2>Zaloguj się</h2>
-        {error && <div className="error-message">{error}</div>}
+        {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="username">Nazwa użytkownika:</label>
