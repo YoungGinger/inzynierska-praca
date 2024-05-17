@@ -14,7 +14,7 @@
   align-items: center;
   padding-left: 40px;
   padding-top: 40px;
-  order: 1; /* Ustawienie kolejności wyświetlania na 1, aby było nad formularzem */
+  order: 1;
 }
 
 .logo-img {
@@ -64,20 +64,106 @@ button:hover {
   background-color: #424344;
 }
 
-/* Media queries dla responsywności */
+.login-container {
+  max-width: 600px;
+  margin: 100px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 40px;
+  padding-top: 40px;
+  order: 1;
+}
+
+.logo-img {
+  max-width: 100%;
+  height: auto;
+}
+
+.form-content {
+  flex: 1;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+}
+
+h2 {
+  text-align: center;
+  font-weight: bold;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #171818;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #424344;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 20px;
+  text-align: center;
+}
 
 @media screen and (max-width: 600px) {
   .login-container {
-    flex-direction: column; /* Ustawienie kierunku flex na kolumnę dla ekranów o szerokości mniejszej niż 600px */
+    flex-direction: column;
   }
 
   .img-container {
-    flex: none; /* Wyłączenie elastyczności, aby logo było na stałe obok formularza */
+    flex: none;
     padding: 0;
-    order: 2; /* Ustawienie kolejności wyświetlania na 2, aby było pod formularzem */
+    order: 2;
   }
 
   .form-content {
-    flex: none; /* Wyłączenie elastyczności dla formularza */
+    flex: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .login-container {
+    flex-direction: column;
+  }
+
+  .img-container {
+    flex: none;
+    padding: 0;
+    order: 2;
+  }
+
+  .form-content {
+    flex: none;
   }
 }

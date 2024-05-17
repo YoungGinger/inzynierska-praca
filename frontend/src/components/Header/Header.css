@@ -1,5 +1,5 @@
 header {
-  background-color: #003366;
+  background-color: #505357;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -46,7 +46,7 @@ header .user-info span {
 
 header .user-info button {
   padding: 0.5rem 1rem;
-  background-color: #006699;
+  background-color: #0c0c0c;
   border: none;
   border-radius: 5px;
   color: white;
@@ -54,72 +54,23 @@ header .user-info button {
 }
 
 header .user-info button:hover {
-  background-color: #005577;
+  background-color: #3b3e3f;
 }
 
-/* Media Queries */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: center; /* Centrowanie elementów na mniejszych ekranach */
-  }
-
-  header .logo,
-  header nav,
-  header .user-info {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 10px; /* Dodanie marginesu dla lepszej czytelności */
-  }
-
-  header nav ul {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  header nav ul li {
-    margin-top: 10px;
-    margin-left: 0; /* Usunięcie lewego marginesu dla lepszego wyświetlania w pionie */
-  }
-}
-
-@media (max-width: 480px) {
-  header .logo a {
-    font-size: 1rem; /* Dalsze zmniejszenie fontu logo */
-  }
-
-  header nav ul li a {
-    font-size: 0.9rem; /* Zmniejszenie rozmiaru fontów linków */
-  }
-
-  header .user-info span {
-    font-size: 0.8rem; /* Zmniejszenie tekstu w sekcji użytkownika */
-  }
-
-  header .user-info button {
-    padding: 0.3rem 0.6rem; /* Zmniejszenie paddingu przycisku */
-    font-size: 0.8rem; /* Zmniejszenie rozmiaru tekstu przycisku */
-  }
-}
-
-/* Stylowanie przycisku menu hamburger */
 .menu-toggle {
-  display: none; /* Domyślnie ukryty */
+  display: none;
   font-size: 1.5rem;
   cursor: pointer;
 }
 
-/* Style dla nawigacji, gdy menu jest zamknięte/zwiniete */
 nav.nav {
   display: flex;
 }
 
-/* Style dla nawigacji, gdy menu jest otwarte/rozwinięte */
 nav.open {
   display: block;
 }
 
-/* Media Queries dla responsywności */
 @media (max-width: 768px) {
   header {
     flex-direction: column;
@@ -127,15 +78,18 @@ nav.open {
   }
 
   .menu-toggle {
-    display: block; /* Pokazuje przycisk hamburger na mniejszych ekranach */
+    display: block;
   }
 
   nav.nav {
-    display: none; /* Ukrywa nawigację, gdy menu jest zwiniete */
+    display: none;
+    width: 100%;
   }
 
   nav.open {
-    display: block; /* Pokazuje nawigację w stylu blokowym, gdy menu jest rozwinięte */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   header nav ul {
@@ -144,7 +98,27 @@ nav.open {
 
   header nav ul li {
     margin-top: 10px;
+    margin-left: 0;
     text-align: center;
     width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  header .logo a {
+    font-size: 1rem;
+  }
+
+  header nav ul li a {
+    font-size: 0.9rem;
+  }
+
+  header .user-info span {
+    font-size: 0.8rem;
+  }
+
+  header .user-info button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
   }
 }
