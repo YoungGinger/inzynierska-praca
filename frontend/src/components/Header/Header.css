@@ -33,27 +33,47 @@ header nav ul li a {
   color: white;
   text-decoration: none;
   font-size: 1.2rem;
+  transition: color 0.3s ease;
 }
 
-header .user-info {
+header nav ul li a:hover {
+  color: #ccc;
+}
+
+header .profile {
+  position: relative;
   display: flex;
   align-items: center;
 }
 
-header .user-info span {
-  margin-right: 10px;
+.profile-icon {
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
 }
 
-header .user-info button {
+.profile-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #505357;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.profile-menu button {
   padding: 0.5rem 1rem;
   background-color: #0c0c0c;
   border: none;
   border-radius: 5px;
   color: white;
   cursor: pointer;
+  width: 100%;
+  text-align: left;
 }
 
-header .user-info button:hover {
+.profile-menu button:hover {
   background-color: #3b3e3f;
 }
 
@@ -101,6 +121,10 @@ nav.open {
     margin-left: 0;
     text-align: center;
     width: 100%;
+  }
+
+  header .user-info {
+    display: none;
   }
 }
 
