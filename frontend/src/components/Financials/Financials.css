@@ -1,0 +1,60 @@
+.financials-page {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.finances-table,
+.player-salaries-table,
+.coach-salaries-table {
+  margin-bottom: 40px;
+}
+
+.finances-table table,
+.player-salaries-table table,
+.coach-salaries-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.finances-table th,
+.player-salaries-table th,
+.coach-salaries-table th,
+.finances-table td,
+.player-salaries-table td,
+.coach-salaries-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.finances-table th,
+.player-salaries-table th,
+.coach-salaries-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.finances-table td,
+.player-salaries-table td,
+.coach-salaries-table td {
+  text-align: left;
+}
+
+.player-salaries-table input,
+.coach-salaries-table input {
+  width: 100px;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+button {
+  background-color: #171818;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #424344;
+}

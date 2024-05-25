@@ -1,13 +1,110 @@
-main {
+.home-page {
+  display: flex;
+  justify-content: center;
   padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.profile-section {
+  width: 300px;
   text-align: center;
+  margin-right: 20px;
+  margin-left: -100px;
 }
 
-main h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
+.profile-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #333;
 }
 
-main p {
+.profile-section p {
   font-size: 1.2rem;
+  color: #666;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 20px 0;
+  object-fit: cover;
+  border: 3px solid #505357;
+}
+
+.content-section {
+  flex-grow: 1;
+}
+
+.content-section section {
+  margin: 20px 0;
+}
+
+.content-section section h2 {
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.content-section section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.content-section section ul li {
+  background-color: #f4f4f4;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .home-page {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-section {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+    margin-left: 0;
+  }
+
+  .profile-section h1 {
+    font-size: 2rem;
+  }
+
+  .profile-section p {
+    font-size: 1rem;
+  }
+
+  .profile-picture {
+    width: 120px;
+    height: 120px;
+  }
+
+  .content-section {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-section h1 {
+    font-size: 1.5rem;
+  }
+
+  .profile-section p {
+    font-size: 0.9rem;
+  }
+
+  .profile-picture {
+    width: 100px;
+    height: 100px;
+  }
+
+  .content-section section h2 {
+    font-size: 1.5rem;
+  }
 }

@@ -29,32 +29,26 @@ const LoginForm = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        console.log("Login successful:", data);
-
         localStorage.setItem("token", data.token);
 
-        const user = data.user;
-        if (!user) {
-          throw new Error("Brak danych użytkownika w odpowiedzi.");
-        }
-        console.log("User role:", user);
+        const userRole = data.user.is_player
+          ? "player"
+          : data.user.is_coach
+          ? "coach"
+          : "president";
+        const userData = {
+          ...data.user,
+          role: userRole,
+          photo: data.user.photo,
+        };
+        localStorage.setItem("user", JSON.stringify(userData));
 
-        if (user.is_player) {
-          navigate("/PlayerHome");
-        } else if (user.is_coach) {
-          navigate("/CoachHome");
-        } else if (user.is_president) {
-          navigate("/PresidentHome");
-        } else {
-          navigate("/home");
-        }
+        navigate("/home");
       } else {
-        setError("Failed to login. Please check your credentials.");
-        console.error("Failed to login:", data);
+        setError("Nie udało się zalogować. Sprawdź swoje dane");
       }
     } catch (error) {
-      setError("Network error. Please try again.");
-      console.error("Network error:", error);
+      setError("Błąd sieci. Proszę spróbuj ponownie.");
     }
   };
 

@@ -1,64 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../../img/logo_v1.png";
+import profileIcon from "../../img/profile.svg";
 
-const Header = () => {
-  const [isOpen, setIsOpen] = useState(false); // Dodaj stan dla isOpen
-  const [userData, setUserData] = useState(null);
-  const navigate = useNavigate();
+const Header = ({ userRole }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleLogout = async () => {
-    const token = localStorage.getItem("token");
-    try {
-      const response = await fetch("http://127.0.0.1:8000/api/logout/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      });
-
-      if (response.ok) {
-        localStorage.removeItem("token");
-        navigate("/login");
-      } else {
-        console.error("Failed to logout");
-      }
-    } catch (error) {
-      console.error("Network error:", error);
-    }
+  const toggleProfileMenu = () => {
+    setProfileMenuOpen(!profileMenuOpen);
   };
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const token = localStorage.getItem("token");
-      try {
-        const response = await fetch("http://127.0.0.1:8000/api/user/", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Token ${token}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch user data");
-        }
-
-        const data = await response.json();
-        setUserData(data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
-    fetchUserData();
-  }, []);
 
   return (
     <header>
@@ -73,22 +29,65 @@ const Header = () => {
       <nav className={isOpen ? "nav open" : "nav"}>
         <ul>
           <li>
-            <Link to="/dashboard">Panel</Link>
+            <Link to="/home">Home</Link>
           </li>
-          <li>
-            <Link to="/team">Drużyna</Link>
-          </li>
-          <li>
-            <Link to="/schedule">Harmonogram</Link>
-          </li>
+          {userRole === "player" && (
+            <>
+              <li>
+                <Link to="/schedule">Harmonogram</Link>
+              </li>
+              <li>
+                <Link to="/achievements">Osiągnięcia</Link>
+              </li>
+            </>
+          )}
+          {userRole === "coach" && (
+            <>
+              <li>
+                <Link to="/team-management">Zarządzanie drużyną</Link>
+              </li>
+              <li>
+                <Link to="/training-schedule">Harmonogram treningów</Link>
+              </li>
+            </>
+          )}
+          {userRole === "president" && (
+            <>
+              <li>
+                <Link to="/financials">Finanse</Link>
+              </li>
+              <li>
+                <Link to="/club-management">Zarządzanie klubem</Link>
+              </li>
+              <li>
+                <Link to="/team-management">Zarządzanie zawodnikami</Link>
+              </li>
+              <li>
+                <Link to="/schedule">Harmonogram</Link>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
-      <div className="user-info">
-        {userData && (
-          <>
-            <span>{userData.username}</span>
-            <button onClick={handleLogout}>Wyloguj</button>
-          </>
+      <div className="profile">
+        <img
+          src={profileIcon}
+          className="profile-icon"
+          alt="Profile"
+          onClick={toggleProfileMenu}
+        />
+        {profileMenuOpen && (
+          <div className="profile-menu">
+            <button
+              onClick={() => {
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+                window.location.href = "/login";
+              }}
+            >
+              Wyloguj
+            </button>
+          </div>
         )}
       </div>
     </header>

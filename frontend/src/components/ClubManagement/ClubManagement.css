@@ -1,0 +1,48 @@
+.club-management-page {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.club-management-page h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.employees-section,
+.events-section {
+  margin-bottom: 40px;
+}
+
+.employees-table,
+.events-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.employees-table th,
+.employees-table td,
+.events-table th,
+.events-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.employees-table th,
+.events-table th {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.employees-table tr:nth-child(even),
+.events-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.employees-table tr:hover,
+.events-table tr:hover {
+  background-color: #f1f1f1;
+}

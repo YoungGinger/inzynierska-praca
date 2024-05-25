@@ -1,0 +1,50 @@
+.achievements-page {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.achievements-page h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.achievements-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.achievement {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px;
+  width: calc(33% - 40px);
+  box-sizing: border-box;
+}
+
+.achievement h3 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.achievement p {
+  font-size: 1rem;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .achievement {
+    width: calc(50% - 40px);
+  }
+}
+
+@media (max-width: 480px) {
+  .achievement {
+    width: 100%;
+  }
+}
